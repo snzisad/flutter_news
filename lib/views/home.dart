@@ -38,7 +38,7 @@ class _HomeState extends State<Home> {
           children: <Widget>[
             Container(
               height: 80,
-              padding: EdgeInsets.symmetric(horizontal: 10),
+              padding: EdgeInsets.symmetric(horizontal: 5),
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
                 shrinkWrap: true,
@@ -72,31 +72,28 @@ class CategoryTile extends StatelessWidget {
 
       },
       child: Container(
-        margin: EdgeInsets.only(right: 10),
-        child: Stack(
-          children: <Widget>[
-            ClipRRect(
-              borderRadius: BorderRadius.circular(10),
-              child: Image.network(imgUrl, height: 70, width: 110, fit: BoxFit.cover,),
-            ),
-            Container(
-              alignment: Alignment.center,
-              height: 70, width: 110,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                color: Colors.black26
-              ),
-              child: Text(
-                title,
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 14,
-                  fontWeight: FontWeight.w500
+        margin: EdgeInsets.symmetric(horizontal: 5),
+        width: 110,
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(10),
+          child: Stack(
+            children: <Widget>[
+              Image.network(imgUrl, height: 80, fit: BoxFit.cover,),
+              Container(
+                alignment: Alignment.center,
+                color: Colors.black26,
+                child: Text(
+                  title,
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 14,
+                      fontWeight: FontWeight.w500
+                  ),
                 ),
-              ),
-            )
-          ],
-        ),
+              )
+            ],
+          ),
+        )
       ),
     );
   }

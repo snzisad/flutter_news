@@ -1,5 +1,7 @@
 import 'package:news_portal/models/category_model.dart';
 
+String Apikey = "f0f0ebcff23e4c01a21dd11079ebcd3c";
+
 List<CategoryModel> getCategories(){
   List<CategoryModel> myCategories = new List<CategoryModel>();
   

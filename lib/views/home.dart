@@ -7,6 +7,9 @@ import 'package:news_portal/models/article_models.dart';
 import 'package:news_portal/models/category_model.dart';
 import 'dart:developer' as developer;
 
+import 'package:news_portal/views/article_view.dart';
+import 'package:news_portal/views/category_news.dart';
+
 class Home extends StatefulWidget {
   @override
   _HomeState createState() => _HomeState();
@@ -53,7 +56,7 @@ class _HomeState extends State<Home> {
           child: CircularProgressIndicator(),
         ),
       ) : SingleChildScrollView(
-        padding: EdgeInsets.symmetric(horizontal: 5),
+        padding: EdgeInsets.symmetric(horizontal: 10),
         child: Container(child: Column(
             children: <Widget>[
               // categories
@@ -84,6 +87,7 @@ class _HomeState extends State<Home> {
                       title: articles[index].title,
                       imgURL: articles[index].urlToImage,
                       desc: articles[index].description,
+                      url: articles[index].url,
                     );
                   },
                 ),
@@ -107,7 +111,9 @@ class CategoryTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: (){
-
+        Navigator.push(context, MaterialPageRoute(
+            builder: (context) => CategoryWiseNews(categoryTitle: title)
+        ));
       },
       child: Container(
         margin: EdgeInsets.symmetric(horizontal: 5),
@@ -138,32 +144,39 @@ class CategoryTile extends StatelessWidget {
 }
 
 class PostTile extends StatelessWidget{
-  final String imgURL, title, desc;
-  PostTile({this.imgURL, this.title, this.desc});
+  final String imgURL, title, desc, url;
+  PostTile({this.imgURL, this.title, this.desc, this.url});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.only(bottom: 15),
-      child: Column(
-        children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(7),
-              child: Image.network(imgURL)
-          ),
-          SizedBox(height: 3,),
-          Text(title, style: TextStyle(
-            fontSize: 17,
-            fontWeight: FontWeight.w700,
-            color: Colors.black87
-          ),),
-          SizedBox(height: 5,),
-          Text(desc, style: TextStyle(
-              fontSize: 13,
-              color: Colors.black54
+    return GestureDetector(
+      onTap: (){
+        Navigator.push(context, MaterialPageRoute(
+          builder: (context) => ArticleView(postURL: url)
+        ));
+      },
+      child: Container(
+        margin: EdgeInsets.only(bottom: 15),
+        child: Column(
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(7),
+                child: Image.network(imgURL)
             ),
-          )
-        ],
+            SizedBox(height: 3,),
+            Text(title, style: TextStyle(
+              fontSize: 17,
+              fontWeight: FontWeight.w700,
+              color: Colors.black87
+            ),),
+            SizedBox(height: 5,),
+            Text(desc, style: TextStyle(
+                fontSize: 13,
+                color: Colors.black54
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
